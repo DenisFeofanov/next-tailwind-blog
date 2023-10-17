@@ -8,5 +8,9 @@ const montserrat = Montserrat({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component className={montserrat.className} {...pageProps} />;
+  return (
+    <div className={montserrat.className}>
+      <Component {...pageProps} />
+    </div>
+  );
 }
