@@ -1,4 +1,5 @@
 import Annotation from "./Annotation";
+import Header from "./Header";
 
 interface Props {
   children: React.ReactNode;
@@ -8,10 +9,12 @@ interface Props {
 export default function Layout({ children, home }: Props) {
   return (
     <>
-      <header>
-        <Annotation />
-      </header>
-      <main className="bg-white-400">{children}</main>
+      <Annotation />
+
+      <div className="bg-white-400 px-52">
+        <Header />
+        {children}
+      </div>
     </>
   );
 }
