@@ -1,4 +1,5 @@
 import Annotation from "./Annotation";
+import Footer from "./Footer";
 import Header from "./Header";
 
 interface Props {
@@ -15,6 +16,8 @@ export default function Layout({ children, home }: Props) {
         <Header />
         {children}
       </div>
+
+      <Footer />
     </>
   );
 }
