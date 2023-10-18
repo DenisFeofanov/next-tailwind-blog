@@ -1,13 +1,13 @@
 import Layout from "@/components/Layout";
+import MorePosts from "@/components/MorePosts";
 import PreviewPost from "@/components/PreviewPost";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
     <Layout>
       <PreviewPost />
+
+      <MorePosts />
     </Layout>
   );
 }
