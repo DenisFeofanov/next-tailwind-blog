@@ -1,6 +1,6 @@
 function Header() {
   return (
-    <header className="mt-16 justify-between items-center flex gap-5">
+    <header className="mt-16 mb-12 justify-between items-center flex gap-5">
       <h1 className="text-black text-8xl font-bold leading-[120%] tracking-tighter">
         Blog.
       </h1>

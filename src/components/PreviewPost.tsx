@@ -6,7 +6,7 @@ import Author from "./Author";
 function PreviewPost() {
   const { cover, heading, text, author_avatar, author_name, date } = posts[0];
   return (
-    <section className="mt-12">
+    <section>
       <Image src={cover} width={1496} height={748} alt="Preview post cover" />
 
       <div className="mt-16 flex justify-between items-start gap-20">
