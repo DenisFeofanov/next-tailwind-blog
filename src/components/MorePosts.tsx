@@ -21,7 +21,7 @@ function MorePosts() {
               {post.heading}
             </h3>
 
-            <Date date={post.date} className="mt-3" />
+            <Date className="mt-3">{post.date}</Date>
 
             <p className="text-black text-lg mt-4">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

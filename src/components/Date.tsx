@@ -1,10 +1,10 @@
 interface Props {
-  date: string;
   className?: string;
+  children: string;
 }
 
-function Date({ date, className = "" }: Props) {
-  return <p className={`text-black text-lg ${className}`}>{date}</p>;
+function Date({ children, className = "" }: Props) {
+  return <p className={`text-black text-lg ${className}`}>{children}</p>;
 }
 
 export default Date;

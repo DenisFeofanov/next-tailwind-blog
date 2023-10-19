@@ -63,7 +63,7 @@ export default function Post({
         />
 
         <article className="w-[45%] mx-auto">
-          <Date date={date} className="mt-16" />
+          <Date className="mt-16">{date}</Date>
           <p className="mt-6 text-black text-lg break-word">{text}</p>
         </article>
       </Layout>

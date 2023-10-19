@@ -13,7 +13,7 @@ function PreviewPost() {
         <div className="flex-[2_1_40%]">
           <h3 className="text-black text-5xl/tight break-word">{heading}</h3>
 
-          <Date date={date} className="mt-4" />
+          <Date className="mt-4">{date}</Date>
         </div>
 
         <div className="flex-[3_1_60%]">
