@@ -1,4 +1,4 @@
-interface Post {
+export interface Post {
   cover: string;
   heading: string;
   text: string;

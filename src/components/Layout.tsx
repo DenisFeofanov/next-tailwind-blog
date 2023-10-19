@@ -13,7 +13,7 @@ export default function Layout({ children, home }: Props) {
       <Annotation />
 
       <div className="bg-white-400 px-52 pb-32">
-        <Header />
+        <Header home={home} />
         {children}
       </div>
 

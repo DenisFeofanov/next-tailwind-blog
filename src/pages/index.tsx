@@ -4,7 +4,7 @@ import PreviewPost from "@/components/PreviewPost";
 
 export default function Home() {
   return (
-    <Layout>
+    <Layout home>
       <PreviewPost />
 
       <MorePosts />

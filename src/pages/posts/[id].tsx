@@ -1,8 +1,13 @@
+import Author from "@/components/Author";
+import Date from "@/components/Date";
+import Layout from "@/components/Layout";
+import { Post, posts } from "@/data/posts";
 import type {
-  InferGetStaticPropsType,
-  GetStaticProps,
   GetStaticPaths,
+  GetStaticProps,
+  InferGetStaticPropsType,
 } from "next";
+import Image from "next/image";
 import { ParsedUrlQuery } from "querystring";
 
 interface Params extends ParsedUrlQuery {
@@ -10,7 +15,7 @@ interface Params extends ParsedUrlQuery {
 }
 
 interface Props {
-  content: string;
+  post: Post;
 }
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
@@ -30,13 +35,38 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 };
 
 export const getStaticProps: GetStaticProps<Props, Params> = async context => {
-  // we use dynamic paths here, so no undefined for sure
-  const { id } = context.params!;
-  return { props: { content: `It's page ${id}` } };
+  return { props: { post: posts[0] } };
 };
 
 export default function Post({
-  content,
+  post: { cover, heading, text, author_avatar, author_name, date },
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  return <>{content}</>;
+  return (
+    <>
+      <Layout>
+        <h1 className="text-black text-8xl font-bold leading-tight tracking-[-0.25rem]">
+          {heading}
+        </h1>
+
+        <Author
+          className="mt-3"
+          author_avatar={author_avatar}
+          author_name={author_name}
+        />
+
+        <Image
+          className="mt-12"
+          src={cover}
+          width={1496}
+          height={748}
+          alt="Preview post cover"
+        />
+
+        <article className="w-[45%] mx-auto">
+          <Date date={date} className="mt-16" />
+          <p className="mt-6 text-black text-lg break-word">{text}</p>
+        </article>
+      </Layout>
+    </>
+  );
 }
