@@ -1,6 +1,7 @@
 import Author from "@/components/Author";
 import Date from "@/components/Date";
 import Layout from "@/components/Layout";
+import Text from "@/components/Text";
 import { Post, posts } from "@/data/posts";
 import type {
   GetStaticPaths,
@@ -64,7 +65,7 @@ export default function Post({
 
         <article className="w-[45%] mx-auto">
           <Date className="mt-16">{date}</Date>
-          <p className="mt-6 text-black text-lg break-word">{text}</p>
+          <Text className="mt-6">{text}</Text>
         </article>
       </Layout>
     </>

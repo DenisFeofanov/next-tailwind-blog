@@ -1,7 +1,8 @@
-import Image from "next/image";
-import Date from "./Date";
 import { posts } from "@/data/posts";
+import Image from "next/image";
 import Author from "./Author";
+import Date from "./Date";
+import Text from "./Text";
 
 function PreviewPost() {
   const { cover, heading, text, author_avatar, author_name, date } = posts[0];
@@ -17,7 +18,7 @@ function PreviewPost() {
         </div>
 
         <div className="flex-[3_1_60%]">
-          <p className="text-black text-lg break-word">{text}</p>
+          <Text>{text}</Text>
           <Author
             className="mt-4"
             author_avatar={author_avatar}

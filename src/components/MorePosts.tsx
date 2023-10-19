@@ -2,6 +2,7 @@ import { posts } from "@/data/posts";
 import Image from "next/image";
 import Author from "./Author";
 import Date from "./Date";
+import Text from "./Text";
 
 function MorePosts() {
   // take second and third posts
@@ -23,13 +24,7 @@ function MorePosts() {
 
             <Date className="mt-3">{post.date}</Date>
 
-            <p className="text-black text-lg mt-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Praesent elementum facilisis leo vel fringilla est ullamcorper
-              eget. At imperdiet dui accumsan sit amet nulla facilities morbi
-              tempus.
-            </p>
+            <Text className="mt-4">{post.text}</Text>
 
             <Author
               className="mt-4"
