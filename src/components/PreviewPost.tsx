@@ -13,11 +13,7 @@ function PreviewPost({ post }: Props) {
 
   return (
     <section>
-      <CoverImage
-        title={title}
-        responsiveImage={coverImage.responsiveImage}
-        slug={slug}
-      />
+      <CoverImage title={title} responsiveImage={coverImage.responsiveImage} />
 
       <div className="mt-16 flex justify-between items-start gap-20">
         <div className="flex-[2_1_40%]">

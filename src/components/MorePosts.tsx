@@ -1,12 +1,15 @@
-import { posts } from "@/data/posts";
-import Image from "next/image";
+import { Post } from "@/interfaces/Post";
 import Author from "./Author";
+import CoverImage from "./CoverImage";
 import Date from "./Date";
 import Text from "./Text";
 
-function MorePosts() {
+interface Props {
+  posts: Post[];
+}
+
+function MorePosts({ posts }: Props) {
   // take second and third posts
-  const morePosts = posts.slice(1, 3);
   return (
     <section className="mt-28">
       <h2 className="text-black text-7xl/tight font-bold tracking-tighter">
@@ -14,24 +17,20 @@ function MorePosts() {
       </h2>
 
       <div className="mt-8 flex items-start gap-32">
-        {morePosts.map(post => (
-          <div key={post.title}>
-            <Image
-              src={post.coverImage}
-              width={681}
-              height={340}
-              alt="Post cover"
+        {posts.map(({ title, coverImage, date, excerpt, author }) => (
+          <div key={title}>
+            <CoverImage
+              title={title}
+              responsiveImage={coverImage.responsiveImage}
             />
 
-            <h3 className="mt-5 text-black text-3xl leading-10">
-              {post.title}
-            </h3>
+            <h3 className="mt-5 text-black text-3xl leading-10">{title}</h3>
 
-            <Date className="mt-3">{post.date}</Date>
+            <Date className="mt-3">{date}</Date>
 
-            <Text className="mt-4">{post.excerpt}</Text>
+            <Text className="mt-4">{excerpt}</Text>
 
-            <Author className="mt-4" author={post.author} />
+            <Author className="mt-4" author={author} />
           </div>
         ))}
       </div>

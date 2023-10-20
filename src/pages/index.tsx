@@ -5,11 +5,14 @@ import { Post } from "@/interfaces/Post";
 import { getAllPostsForHome } from "@/lib/api";
 
 export default function Home({ allPosts }: { allPosts: Post[] }) {
+  const previewPost = allPosts[0];
+  const morePosts = allPosts.slice(1, 3);
+  console.log(morePosts);
   return (
     <Layout home>
-      <PreviewPost post={allPosts[0]} />
+      <PreviewPost post={previewPost} />
 
-      <MorePosts />
+      <MorePosts posts={morePosts} />
     </Layout>
   );
 }
