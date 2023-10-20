@@ -72,7 +72,7 @@ export async function getAllPostsForHome(preview) {
   const data = await fetchAPI(
     `
     {
-      allPosts(orderBy: date_DESC, first: 20) {
+      allPosts(orderBy: date_ASC, first: 20) {
         title
         slug
         excerpt
