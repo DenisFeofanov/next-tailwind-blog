@@ -1,4 +1,8 @@
 export interface Author {
   name: string;
-  avatar: string;
+  avatar: Avatar;
+}
+
+export interface Avatar {
+  url: string;
 }

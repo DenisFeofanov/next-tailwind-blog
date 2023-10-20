@@ -1,18 +1,22 @@
-import { posts } from "@/data/posts";
-import Image from "next/image";
+import { Post } from "@/interfaces/Post";
 import Author from "./Author";
+import CoverImage from "./CoverImage";
 import Date from "./Date";
 import Text from "./Text";
 
-function PreviewPost() {
-  const { coverImage, title, excerpt, author, date } = posts[0];
+interface Props {
+  post: Post;
+}
+
+function PreviewPost({ post }: Props) {
+  const { coverImage, title, excerpt, author, date, slug } = post;
+
   return (
     <section>
-      <Image
-        src={coverImage}
-        width={1496}
-        height={748}
-        alt="Preview post cover"
+      <CoverImage
+        title={title}
+        responsiveImage={coverImage.responsiveImage}
+        slug={slug}
       />
 
       <div className="mt-16 flex justify-between items-start gap-20">

@@ -6,6 +6,6 @@ export interface Post {
   slug: string;
   excerpt: string;
   date: string;
-  coverImage: string;
+  coverImage: any;
   author: Author;
 }
