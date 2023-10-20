@@ -2,7 +2,8 @@ import Author from "@/components/Author";
 import Date from "@/components/Date";
 import Layout from "@/components/Layout";
 import Text from "@/components/Text";
-import { Post, posts } from "@/data/posts";
+import { posts } from "@/data/posts";
+import { Post } from "@/interfaces/Post";
 import type {
   GetStaticPaths,
   GetStaticProps,
@@ -40,24 +41,20 @@ export const getStaticProps: GetStaticProps<Props, Params> = async context => {
 };
 
 export default function Post({
-  post: { cover, heading, text, author_avatar, author_name, date },
+  post: { coverImage, title, excerpt, author, date },
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <Layout>
         <h1 className="text-black text-8xl font-bold leading-tight tracking-[-0.25rem]">
-          {heading}
+          {title}
         </h1>
 
-        <Author
-          className="mt-3"
-          author_avatar={author_avatar}
-          author_name={author_name}
-        />
+        <Author className="mt-3" author={author} />
 
         <Image
           className="mt-12"
-          src={cover}
+          src={coverImage}
           width={1496}
           height={748}
           alt="Preview post cover"
@@ -65,7 +62,7 @@ export default function Post({
 
         <article className="w-[45%] mx-auto">
           <Date className="mt-16">{date}</Date>
-          <Text className="mt-6">{text}</Text>
+          <Text className="mt-6">{excerpt}</Text>
         </article>
       </Layout>
     </>

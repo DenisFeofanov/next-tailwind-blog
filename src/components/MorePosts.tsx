@@ -15,22 +15,23 @@ function MorePosts() {
 
       <div className="mt-8 flex items-start gap-32">
         {morePosts.map(post => (
-          <div key={post.heading}>
-            <Image src={post.cover} width={681} height={340} alt="Post cover" />
+          <div key={post.title}>
+            <Image
+              src={post.coverImage}
+              width={681}
+              height={340}
+              alt="Post cover"
+            />
 
             <h3 className="mt-5 text-black text-3xl leading-10">
-              {post.heading}
+              {post.title}
             </h3>
 
             <Date className="mt-3">{post.date}</Date>
 
-            <Text className="mt-4">{post.text}</Text>
+            <Text className="mt-4">{post.excerpt}</Text>
 
-            <Author
-              className="mt-4"
-              author_avatar={post.author_avatar}
-              author_name={post.author_name}
-            />
+            <Author className="mt-4" author={post.author} />
           </div>
         ))}
       </div>

@@ -3,12 +3,12 @@ interface Props {
 }
 
 function Header({ home }: Props) {
-  const heading = "Blog.";
+  const title = "Blog.";
   if (home)
     return (
       <header className="mt-16 mb-12 justify-between items-center flex gap-5">
         <h1 className="text-black text-8xl font-bold leading-[120%] tracking-tighter">
-          {heading}
+          {title}
         </h1>
 
         <p className="text-black text-lg leading-[155.56%] ">
@@ -31,7 +31,7 @@ function Header({ home }: Props) {
     return (
       <header className="mt-8 mb-20 justify-between items-center flex gap-5">
         <h2 className="text-black text-4xl font-bold leading-[120%] tracking-tighter">
-          {heading}
+          {title}
         </h2>
       </header>
     );
