@@ -7,7 +7,6 @@ import { getAllPostsForHome } from "@/lib/api";
 export default function Home({ allPosts }: { allPosts: Post[] }) {
   const previewPost = allPosts[0];
   const morePosts = allPosts.slice(1, 3);
-  console.log(morePosts);
   return (
     <Layout home>
       <PreviewPost post={previewPost} />
