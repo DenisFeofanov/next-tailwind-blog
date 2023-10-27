@@ -3,11 +3,16 @@ import { Image, ResponsiveImageType } from "react-datocms";
 interface Props {
   title: string;
   responsiveImage: ResponsiveImageType;
+  className?: string;
 }
 
-export default function CoverImage({ title, responsiveImage }: Props) {
+export default function CoverImage({
+  title,
+  responsiveImage,
+  className,
+}: Props) {
   return (
-    <div className="sm:mx-0">
+    <div className={`sm:mx-0 ${className}`}>
       {/* eslint-disable-next-line jsx-a11y/alt-text */}
       <Image
         data={{
