@@ -19,7 +19,6 @@ export default function CoverImage({
           ...responsiveImage,
           alt: `Cover Image for ${title}`,
         }}
-        className="shadow-small hover:shadow-2xl transition-shadow duration-200"
       />
     </div>
   );
