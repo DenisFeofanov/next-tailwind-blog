@@ -16,7 +16,9 @@ export default function Home({ allPosts }: { allPosts: Post[] }) {
           <MorePosts posts={morePosts} />
         </>
       ) : (
-        <p>No content</p>
+        <h2 className="text-black text-4xl tracking-tight font-bold">
+          No posts found
+        </h2>
       )}
     </Layout>
   );
