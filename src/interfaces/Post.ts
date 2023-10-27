@@ -9,3 +9,7 @@ export interface Post {
   coverImage: any;
   author: Author;
 }
+
+export interface PostSlug {
+  slug: string;
+}

@@ -1,4 +1,5 @@
 import { Post } from "@/interfaces/Post";
+import Link from "next/link";
 import Author from "./Author";
 import CoverImage from "./CoverImage";
 import Date from "./Date";
@@ -17,8 +18,8 @@ function MorePosts({ posts }: Props) {
       </h2>
 
       <div className="mt-8 flex items-start gap-32">
-        {posts.map(({ title, coverImage, date, excerpt, author }) => (
-          <div key={title}>
+        {posts.map(({ title, coverImage, date, excerpt, author, slug }) => (
+          <Link href={`/posts/${slug}`} key={title}>
             <CoverImage
               title={title}
               responsiveImage={coverImage.responsiveImage}
@@ -31,7 +32,7 @@ function MorePosts({ posts }: Props) {
             <Text className="mt-4">{excerpt}</Text>
 
             <Author className="mt-4" author={author} />
-          </div>
+          </Link>
         ))}
       </div>
     </section>

@@ -1,48 +1,24 @@
 import Author from "@/components/Author";
+import CoverImage from "@/components/CoverImage";
 import Date from "@/components/Date";
 import Layout from "@/components/Layout";
 import Text from "@/components/Text";
-import { posts } from "@/data/posts";
 import { Post } from "@/interfaces/Post";
-import type {
-  GetStaticPaths,
-  GetStaticProps,
-  InferGetStaticPropsType,
-} from "next";
-import Image from "next/image";
+import { getPostBySlug, getPostsSlugs } from "@/lib/api";
+import type { GetStaticPaths, GetStaticProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 
 interface Params extends ParsedUrlQuery {
-  id: string;
+  slug: string;
 }
 
 interface Props {
   post: Post;
 }
 
-export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const slugs: string[] = ["path1", "path2"];
-  const paths = slugs.map(id => {
-    return {
-      params: {
-        id,
-      },
-    };
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps<Props, Params> = async context => {
-  return { props: { post: posts[0] } };
-};
-
 export default function Post({
   post: { coverImage, title, excerpt, author, date },
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+}: Props) {
   return (
     <>
       <Layout>
@@ -52,12 +28,10 @@ export default function Post({
 
         <Author className="mt-3" author={author} />
 
-        <Image
+        <CoverImage
           className="mt-12"
-          src={coverImage}
-          width={1496}
-          height={748}
-          alt="Preview post cover"
+          title={title}
+          responsiveImage={coverImage.responsiveImage}
         />
 
         <article className="w-[45%] mx-auto">
@@ -68,3 +42,26 @@ export default function Post({
     </>
   );
 }
+
+export const getStaticPaths: GetStaticPaths<Params> = async () => {
+  const posts = await getPostsSlugs();
+  const paths = posts.map(post => {
+    return {
+      params: {
+        slug: post.slug,
+      },
+    };
+  });
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps<Props, Params> = async ({
+  params,
+}) => {
+  const post = await getPostBySlug(params!.slug);
+  return { props: { post } };
+};

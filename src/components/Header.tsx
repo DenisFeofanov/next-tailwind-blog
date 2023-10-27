@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 interface Props {
   home?: boolean;
 }
@@ -31,7 +33,7 @@ function Header({ home }: Props) {
     return (
       <header className="mt-8 mb-20 justify-between items-center flex gap-5">
         <h2 className="text-black text-4xl font-bold leading-[120%] tracking-tighter">
-          {title}
+          <Link href="/">{title}</Link>
         </h2>
       </header>
     );

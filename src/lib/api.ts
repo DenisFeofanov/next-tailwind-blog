@@ -1,3 +1,5 @@
+import { Post, PostSlug } from "@/interfaces/Post";
+
 const API_URL = "https://graphql.datocms.com";
 const API_TOKEN = process.env.DATOCMS_API_TOKEN;
 
@@ -39,6 +41,49 @@ async function fetchAPI(query, { variables, preview } = {}) {
   return json.data;
 }
 
+export async function getPostsSlugs(): Promise<PostSlug[]> {
+  const data = await fetchAPI(`
+    {
+      allPosts {
+        slug
+      }
+    }
+  `);
+  return data?.allPosts;
+}
+
+export async function getPostBySlug(slug: string): Promise<Post> {
+  const data = await fetchAPI(
+    `query PostBySlug($slug: String) {
+      post(filter: {slug: {eq: $slug}}) {
+        title
+        excerpt
+        date
+        coverImage {
+          responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 2000, h: 1000}) {
+            ...responsiveImageFragment
+          }
+        }
+        author {
+          name
+          avatar {
+            url(imgixParams: {fm: jpg, fit: crop, w: 100, h: 100})
+          }
+        }
+      }
+    }
+    ${responsiveImageFragment}
+    `,
+    {
+      preview: true,
+      variables: {
+        slug,
+      },
+    }
+  );
+  return data?.post;
+}
+
 export async function getPreviewPostBySlug(slug) {
   const data = await fetchAPI(
     `
@@ -55,17 +100,6 @@ export async function getPreviewPostBySlug(slug) {
     }
   );
   return data?.post;
-}
-
-export async function getAllPostsWithSlug() {
-  const data = await fetchAPI(`
-    {
-      allPosts {
-        slug
-      }
-    }
-  `);
-  return data?.allPosts;
 }
 
 export async function getAllPostsForHome(preview) {
