@@ -9,9 +9,15 @@ export default function Home({ allPosts }: { allPosts: Post[] }) {
   const morePosts = allPosts.slice(1, 3);
   return (
     <Layout home>
-      <PreviewPost post={previewPost} />
+      {allPosts.length > 0 ? (
+        <>
+          <PreviewPost post={previewPost} />
 
-      <MorePosts posts={morePosts} />
+          <MorePosts posts={morePosts} />
+        </>
+      ) : (
+        <p>No content</p>
+      )}
     </Layout>
   );
 }

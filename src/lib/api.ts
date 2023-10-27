@@ -20,7 +20,10 @@ const responsiveImageFragment = `
   }
 `;
 
-async function fetchAPI(query, { variables, preview } = {}) {
+async function fetchAPI(
+  query: string,
+  { variables = {}, preview = false } = {}
+) {
   const res = await fetch(API_URL + (preview ? "/preview" : ""), {
     method: "POST",
     headers: {
@@ -42,19 +45,22 @@ async function fetchAPI(query, { variables, preview } = {}) {
 }
 
 export async function getPostsSlugs(): Promise<PostSlug[]> {
-  const data = await fetchAPI(`
+  const data = await fetchAPI(
+    `
     {
       allPosts {
         slug
       }
     }
-  `);
-  return data?.allPosts;
+    `
+  );
+  return data.allPosts;
 }
 
 export async function getPostBySlug(slug: string): Promise<Post> {
   const data = await fetchAPI(
-    `query PostBySlug($slug: String) {
+    `
+    query PostBySlug($slug: String) {
       post(filter: {slug: {eq: $slug}}) {
         title
         excerpt
@@ -81,32 +87,14 @@ export async function getPostBySlug(slug: string): Promise<Post> {
       },
     }
   );
-  return data?.post;
+  return data.post;
 }
 
-export async function getPreviewPostBySlug(slug) {
-  const data = await fetchAPI(
-    `
-    query PostBySlug($slug: String) {
-      post(filter: {slug: {eq: $slug}}) {
-        slug
-      }
-    }`,
-    {
-      preview: true,
-      variables: {
-        slug,
-      },
-    }
-  );
-  return data?.post;
-}
-
-export async function getAllPostsForHome(preview) {
+export async function getAllPostsForHome(preview: boolean): Promise<Post[]> {
   const data = await fetchAPI(
     `
     {
-      allPosts(orderBy: date_ASC, first: 20) {
+      allPosts(orderBy: date_ASC, first: 3) {
         title
         slug
         excerpt
@@ -129,61 +117,5 @@ export async function getAllPostsForHome(preview) {
   `,
     { preview }
   );
-  return data?.allPosts;
-}
-
-export async function getPostAndMorePosts(slug, preview) {
-  const data = await fetchAPI(
-    `
-  query PostBySlug($slug: String) {
-    post(filter: {slug: {eq: $slug}}) {
-      title
-      slug
-      content
-      date
-      ogImage: coverImage{
-        url(imgixParams: {fm: jpg, fit: crop, w: 2000, h: 1000 })
-      }
-      coverImage {
-        responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 2000, h: 1000 }) {
-          ...responsiveImageFragment
-        }
-      }
-      author {
-        name
-        avatar {
-          url(imgixParams: {fm: jpg, fit: crop, w: 100, h: 100, sat: -100})
-        }
-      }
-    }
-
-    morePosts: allPosts(orderBy: date_DESC, first: 2, filter: {slug: {neq: $slug}}) {
-      title
-      slug
-      excerpt
-      date
-      coverImage {
-        responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 2000, h: 1000 }) {
-          ...responsiveImageFragment
-        }
-      }
-      author {
-        name
-        avatar {
-          url(imgixParams: {fm: jpg, fit: crop, w: 100, h: 100, sat: -100})
-        }
-      }
-    }
-  }
-
-  ${responsiveImageFragment}
-  `,
-    {
-      preview,
-      variables: {
-        slug,
-      },
-    }
-  );
-  return data;
+  return data.allPosts;
 }
