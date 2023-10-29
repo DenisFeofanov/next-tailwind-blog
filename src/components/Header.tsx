@@ -26,6 +26,7 @@ function Header({ home }: Props) {
           >
             Tailwind CSS
           </a>
+          , using DatoCMS as the data source
         </p>
       </header>
     );
